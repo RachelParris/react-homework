@@ -27,18 +27,50 @@ After making the previous and next buttons work, also list all the images in the
     ];
 
     class Gallery extends React.Component {
+      constructor () {
+        super();
+
+        // Initilize index to 0
+        this.state = {
+          index: 0
+        }
+      }
+
+      handlePrev = () => {
+        const index = this.state.index;
+
+        if (index === 0) {
+          return index;
+        }
+      
+        this.setState({ index: index - 1 });
+      }
+
+      handleNext = () => {
+        const index = this.state.index;
+        console.log(this.state.index);
+
+        if (index === this.props.images.length - 1) {
+          return index;
+        }
+
+        this.setState({ index: index + 1 });
+      }
+
       render() {
-        let currentImage = this.props.images[1];
+        let index = this.state.index;
+        let currentImage = this.props.images[index];
         return (
           <div>
-            <button>
+            <button onClick={this.handlePrev}>
               Previous
             </button>
-            <button>
+            <button onClick={this.handleNext}>
               Next
             </button>
             <br/>
             <img src={currentImage}/>
+            <div className="gallery"></div>
           </div>
         );
       }
