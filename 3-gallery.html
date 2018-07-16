@@ -3,7 +3,9 @@ Make this gallery application work. The previous and next buttons should cycle t
 
 ## Step 2
 
-After making the previous and next buttons work, also list all the images in the gallery as thumbnails (just use height/height to make them smaller), and make them clickable so that when clicked, the clicked photo becomes the main photo.
+After making the previous and next buttons work, also list all the images in the gallery as thumbnails 
+(just use height/height to make them smaller), and make them clickable so that when clicked, the clicked 
+photo becomes the main photo.
 -->
 <!DOCTYPE html>
 <html>
@@ -56,6 +58,10 @@ After making the previous and next buttons work, also list all the images in the
         this.setState({ index: index + 1 });
       }
 
+      handleImageClick = (index, event) => {
+        this.setState({ index });
+      }
+
       render() {
         let index = this.state.index;
         let currentImage = this.props.images[index];
@@ -66,7 +72,8 @@ After making the previous and next buttons work, also list all the images in the
               key={index} 
               src={image} 
               alt={image- + index}
-              height="100px" />
+              height="100px"
+              onClick={this.handleImageClick.bind(this, index)} />
           );
         });
         return (
