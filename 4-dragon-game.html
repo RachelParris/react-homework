@@ -37,12 +37,58 @@ Hints at the bottom of this file.
           },
           dragon: {
             health: 20
-          }
+          },
+          message: ''
+        }
+      }
+      
+      getRandomInt = (max) => {
+        return Math.floor(Math.random() * Math.floor(max));
+      }
+
+      checkFormessage = () => {
+        const heroHealth = this.state.hero.health;
+        const dragonHealth = this.state.dragon.health;
+        console.log(heroHealth)
+
+        if (heroHealth === 0) {
+          this.setState({ message: 'The hero has perished. Dragon wins!!!' });
+        } else if (dragonHealth === 0) {
+          this.setState({ message: 'The dragon has died. Hero wins!!!' });
         }
       }
 
+      handleFight = () => {
+        // Get random number - either 0 or 1
+        const randomNum = this.getRandomInt(2);
+
+        if (randomNum === 0) {
+          this.setState({
+            hero: {
+              health: this.state.hero.health - 5
+            }         
+          });
+        } else if (randomNum === 1) {
+          this.setState({
+            dragon: {
+              health: this.state.dragon.health - 5
+            }
+          });
+        }
+
+        this.checkFormessage();
+      }
+
+      handleFlight = () => {
+        this.setState({ 
+          hero: {
+            health: this.state.hero.health + 2
+            } 
+          });
+      }
+
       render() {
-        let message = '';
+        let message = this.state.message;
         return (
           <div>
             <img src="http://img10.deviantart.net/e984/i/2015/287/c/5/red_dragon_by_sandara-d6hpycs.jpg" width="400"/>
@@ -52,10 +98,10 @@ Hints at the bottom of this file.
             <br/>
             {message}
             <br/>
-            <button>
+            <button onClick={this.handleFight}>
               Fight
             </button>
-            <button>
+            <button onClick={this.handleFlight}>
               Flight
             </button>
           </div>
