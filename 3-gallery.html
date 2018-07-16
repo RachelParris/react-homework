@@ -48,7 +48,6 @@ After making the previous and next buttons work, also list all the images in the
 
       handleNext = () => {
         const index = this.state.index;
-        console.log(this.state.index);
 
         if (index === this.props.images.length - 1) {
           return index;
@@ -60,6 +59,16 @@ After making the previous and next buttons work, also list all the images in the
       render() {
         let index = this.state.index;
         let currentImage = this.props.images[index];
+
+        let imageGallery = this.props.images.map((image, index) => {
+          return (
+            <img 
+              key={index} 
+              src={image} 
+              alt={image- + index}
+              height="100px" />
+          );
+        });
         return (
           <div>
             <button onClick={this.handlePrev}>
@@ -70,7 +79,9 @@ After making the previous and next buttons work, also list all the images in the
             </button>
             <br/>
             <img src={currentImage}/>
-            <div className="gallery"></div>
+            <div>
+              {imageGallery}
+            </div>
           </div>
         );
       }
