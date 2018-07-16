@@ -28,14 +28,27 @@ Hints at the bottom of this file.
     <script type="text/babel" data-presets="react">
 
     class DragonGame extends React.Component {
+      constructor () {
+        super();
+
+        this.state = {
+          hero: {
+            health: 10
+          },
+          dragon: {
+            health: 20
+          }
+        }
+      }
+
       render() {
         let message = '';
         return (
           <div>
             <img src="http://img10.deviantart.net/e984/i/2015/287/c/5/red_dragon_by_sandara-d6hpycs.jpg" width="400"/>
             <br/>
-            <label>Dragon: 20</label>&nbsp;
-            <label>Hero: 10</label>
+            <label>Dragon: {this.state.dragon.health}</label>&nbsp;
+            <label>Hero: {this.state.hero.health}</label>
             <br/>
             {message}
             <br/>
